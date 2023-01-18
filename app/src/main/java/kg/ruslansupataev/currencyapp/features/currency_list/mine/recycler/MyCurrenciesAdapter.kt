@@ -17,7 +17,9 @@ class MyCurrenciesAdapter: ListAdapter<CurrencyRate, MyCurrencyViewHolder>(
             oldItem == newItem
     }
 ) {
+
     private var unfilteredList: List<CurrencyRate> = listOf()
+    private var lastFilter = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MyCurrencyViewHolder(
         ItemFavCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -47,6 +49,6 @@ class MyCurrenciesAdapter: ListAdapter<CurrencyRate, MyCurrencyViewHolder>(
 
     fun modifyList(list: List<CurrencyRate>) {
         unfilteredList = list
-        submitList(list)
+        filter(lastFilter)
     }
 }

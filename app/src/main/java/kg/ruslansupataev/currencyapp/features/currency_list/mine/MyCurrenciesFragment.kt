@@ -1,12 +1,9 @@
 package kg.ruslansupataev.currencyapp.features.currency_list.mine
 
-import android.graphics.Color
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
 import kg.ruslansupataev.currencyapp.core.BaseFragmentViewBindingState
 import kg.ruslansupataev.currencyapp.core.ISearchableFragment
 import kg.ruslansupataev.currencyapp.databinding.FragmentMyCurrenciesBinding
-import kg.ruslansupataev.currencyapp.domain.models.CurrencyRate
 import kg.ruslansupataev.currencyapp.features.currency_list.mine.recycler.MyCurrenciesAdapter
 import kg.ruslansupataev.currencyapp.features.currency_list.mine.recycler.SwipeToDeleteCallback
 import kg.ruslansupataev.currencyapp.features.currency_list.mine.state.MyCurrenciesEvent
@@ -22,7 +19,6 @@ class MyCurrenciesFragment : BaseFragmentViewBindingState<
     FragmentMyCurrenciesBinding::inflate
 ), ISearchableFragment {
     override val viewModel: MyCurrenciesViewModel by viewModel()
-
 
     private val adapter by lazy {
         MyCurrenciesAdapter()

@@ -20,7 +20,12 @@ class AllCurrenciesAdapter(
             oldItem == newItem
     }
 ) {
+    companion object {
+        const val CURRENCY_TYPE = 2333
+    }
+
     private var unfilteredList: List<CurrencyRate> = listOf()
+    private var lastFilter = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CurrencyViewHolder(
         ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -32,7 +37,12 @@ class AllCurrenciesAdapter(
         holder.onBind(getItem(position))
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return CURRENCY_TYPE
+    }
+
     fun filter(query: CharSequence?) {
+        lastFilter = query.toString()
         val list = mutableListOf<CurrencyRate>()
 
         // perform the data filtering
@@ -52,7 +62,7 @@ class AllCurrenciesAdapter(
 
     fun modifyList(list: List<CurrencyRate>) {
         unfilteredList = list
-        submitList(list)
+        filter(lastFilter)
     }
 
 }

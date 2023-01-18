@@ -2,9 +2,11 @@ package kg.ruslansupataev.currencyapp
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -14,7 +16,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kg.ruslansupataev.currencyapp.core.IFragmentWithoutBottomBar
 import kg.ruslansupataev.currencyapp.core.ISearchableFragment
 import kg.ruslansupataev.currencyapp.databinding.ActivityMainBinding
 
@@ -22,6 +23,7 @@ import kg.ruslansupataev.currencyapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var searchMenuItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -34,9 +36,17 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        navController.addOnDestinationChangedListener { _, dest, _->
-            if (getCurrentFragment() is IFragmentWithoutBottomBar) hideBottomBar()
-            else showBottomBar()
+        navController.addOnDestinationChangedListener { _, dest, _ ->
+            when (dest.id) {
+                R.id.currency_converter_fragment -> {
+                    hideBottomBar()
+                    searchMenuItem?.isVisible = false
+                }
+                else -> {
+                    showBottomBar()
+                    searchMenuItem?.isVisible = true
+                }
+            }
         }
 
         // Passing each menu ID as a set of Ids because each
@@ -55,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        val myActionMenuItem = menu.findItem(R.id.action_search)
-        val searchView = myActionMenuItem.actionView as SearchView?
+        searchMenuItem = menu.findItem(R.id.action_search)
+        val searchView = searchMenuItem?.actionView as SearchView?
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 search(query)
@@ -65,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     searchView.isIconified = true
                 }
 
-                myActionMenuItem.collapseActionView()
+                searchMenuItem?.collapseActionView()
                 return false
             }
 

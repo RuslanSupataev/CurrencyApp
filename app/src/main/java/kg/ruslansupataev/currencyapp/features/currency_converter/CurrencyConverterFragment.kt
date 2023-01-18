@@ -1,7 +1,5 @@
 package kg.ruslansupataev.currencyapp.features.currency_converter
 
-import android.view.ContextMenu
-import android.view.View
 import androidx.core.widget.doOnTextChanged
 import kg.ruslansupataev.currencyapp.core.BaseFragmentViewBindingState
 import kg.ruslansupataev.currencyapp.core.IFragmentWithoutBottomBar
@@ -40,19 +38,10 @@ class CurrencyConverterFragment : BaseFragmentViewBindingState<
                     )
                 }
             } else {
-                binding.tvUsdResult.text = ""
+                binding.tvUsdResult.text = "0.0"
             }
 
         }
-    }
-
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        menu.clear()
-        super.onCreateContextMenu(menu, v, menuInfo)
     }
 
     private fun setObserves(state: StateFlow<CurrencyConverterState>) {
