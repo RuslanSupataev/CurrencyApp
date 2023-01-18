@@ -1,4 +1,4 @@
-package kg.ruslansupataev.currencyapp.features.currency_converter.all.state
+package kg.ruslansupataev.currencyapp.features.currency_list.all.state
 
 import kg.ruslansupataev.currencyapp.core.BaseUIState
 import kg.ruslansupataev.currencyapp.domain.models.CurrencyRate

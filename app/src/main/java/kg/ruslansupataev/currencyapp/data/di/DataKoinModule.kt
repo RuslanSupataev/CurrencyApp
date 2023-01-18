@@ -12,7 +12,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val dataModule = module {
-    factory { provideOkHttpClient(provideCurrentLocale(androidContext())) }
+    factory { provideOkHttpClient() }
     factory { provideRetrofit(get()) }
     factory { provideExchangeRateAPI(get()) }
     factory { CurrencyDatabaseProvider.getDatabase(androidContext()) }

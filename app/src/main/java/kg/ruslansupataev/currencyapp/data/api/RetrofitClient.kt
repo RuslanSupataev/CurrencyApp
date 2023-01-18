@@ -25,7 +25,7 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
  *
  * @return OkHttpClient
  */
-fun provideOkHttpClient(currentLang: String): OkHttpClient = OkHttpClient.Builder()
+fun provideOkHttpClient(currentLang: String? = null): OkHttpClient = OkHttpClient.Builder()
     .hostnameVerifier(MyHostnameVerifier())
     .connectTimeout(10, TimeUnit.SECONDS)
     .readTimeout(10, TimeUnit.SECONDS)
@@ -35,7 +35,7 @@ fun provideOkHttpClient(currentLang: String): OkHttpClient = OkHttpClient.Builde
             proceed(
                 request()
                     .newBuilder()
-                    .addHeader("Accept-Language", currentLang)
+                    //.addHeader("Accept-Language", currentLang)
                     .build()
             )
         }

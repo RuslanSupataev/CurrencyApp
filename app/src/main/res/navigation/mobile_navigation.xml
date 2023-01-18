@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mobile_navigation.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_all_currencies">
 
+    <fragment
+        android:id="@+id/nav_all_currencies"
+        android:name="kg.ruslansupataev.currencyapp.features.currency_list.all.AllCurrenciesFragment"
+        android:label="@string/all_currencies"
+        tools:layout="@layout/fragment_all_currencies">
+        <action
+            android:id="@+id/action_allCurrenciesFragment_to_currencyConverterFragment"
+            app:destination="@id/currency_converter_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_my_currencies"
+        android:name="kg.ruslansupataev.currencyapp.features.currency_list.mine.MyCurrenciesFragment"
+        android:label="@string/my_currencies" />
+    <fragment
+        android:id="@+id/currency_converter_fragment"
+        android:name="kg.ruslansupataev.currencyapp.features.currency_converter.CurrencyConverterFragment"
+        android:label="@string/convert" />
 </navigation>

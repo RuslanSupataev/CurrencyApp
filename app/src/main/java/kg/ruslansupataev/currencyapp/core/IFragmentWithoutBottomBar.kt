@@ -1,0 +1,3 @@
+package kg.ruslansupataev.currencyapp.core
+
+interface IFragmentWithoutBottomBar

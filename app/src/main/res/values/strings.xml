@@ -12,4 +12,7 @@
     <string name="page_title">Page title</string>
     <string name="search">Search</string>
     <string name="unknown_functional">I didn\'t know what\'s it 🙈</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="convert">Convert</string>
 </resources>

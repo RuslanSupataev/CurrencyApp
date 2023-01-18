@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.getKoin
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -29,7 +26,6 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
  * @param Binding is binding of your xml file. Initialized all of your views
  * @param ViewM is your ViewModel (MVVM)
  * @param inflate is member function from your [Binding] to create instance of your xml file
- * @param viewModelClass is [Class] of your [ViewM]
  *
  * @author Ruslan
  * @see BaseStateViewModel
@@ -40,22 +36,13 @@ abstract class BaseFragmentViewBindingState<
         Binding : ViewBinding,
         ViewM : BaseStateViewModel<UIState, UIIntents>,
         >(
-    private val inflate: Inflate<Binding>,
-    private val viewModelClass: Class<ViewM>,
+    private val inflate: Inflate<Binding>
 ) : Fragment() {
 
     private var _binding: Binding? = null
     protected val binding get() = _binding!!
 
-    protected lateinit var viewModel: ViewM
-    private val viewModelFactory: ViewModelProvider.Factory by lazy {
-        getKoin().get()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[viewModelClass]
-    }
+    abstract val viewModel: ViewM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -136,15 +123,4 @@ abstract class BaseFragmentViewBindingState<
         }
     }
 
-    /**
-     * this method allows you to set some [UIIntents] on click to [View]
-     *
-     * View is view which [View.OnClickListener] will be calling [BaseStateViewModel.handleSideEffects]
-     * @param intent is [UIIntents] which will be sending to the [viewModel] after click on it
-     */
-    fun View.setIntentToClickOnView(intent: UIIntents) {
-        setOnClickListener {
-            viewModel.handleSideEffects(intent)
-        }
-    }
 }
