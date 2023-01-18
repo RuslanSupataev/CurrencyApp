@@ -15,13 +15,11 @@ This project is an Android application that displays a list of currencies and th
 
 ## How to use
 
-1. Clone the repository:
-ssh
+1. Clone the repository: 
 ```bash
 git clone git@github.com:RuslanSupataev/CurrencyApp.git
 ```
-or
-https
+or ssh:
 ```bash
 git clone  https://github.com/RuslanSupataev/CurrencyApp.git
 ```
