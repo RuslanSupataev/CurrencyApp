@@ -16,9 +16,12 @@ This project is an Android application that displays a list of currencies and th
 ## How to use
 
 1. Clone the repository:
+ssh
 ```bash
 git clone git@github.com:RuslanSupataev/CurrencyApp.git
 ```
+or
+https
 ```bash
 git clone  https://github.com/RuslanSupataev/CurrencyApp.git
 ```
